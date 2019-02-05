@@ -1,9 +1,9 @@
-"C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\main.c"
+"C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\main.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc
 -I
