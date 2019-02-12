@@ -1,16 +1,23 @@
 #ifndef SERVO_H
 #define SERVO_H
 
+// Hardware limitations information
+#define MIN_SERVO_PULSE_WIDTH 		544
+#define MAX_SERVO_PULSE_WIDTH 		2400
+#define DEFAULT_SERVO_PULSE_WIDTH       1500
+#define REFRESH_INTERVAL 		20000
+
+#define SERVO_NUM                       6
+
 /*
  * Initializes PortD to be used as controller signals for 6 servos
  * and timer2 for servo
  */
-void servo_Init(void);
+void servo_Init();
 
 /*
- * moves the servo with index by setting rad angles
- * index: The number of servo being rotated
- * rad: The rotate angle, in radius. A positive value is clockwise. 
+ * write a pulse width of the given degress to the servo with index number
  */
-void rotate_servo(int index, float rad);
+void servo_write(uint32_t index, uint32_t val);
+
 #endif     //SERVO_H
