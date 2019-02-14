@@ -7,7 +7,9 @@
 #define DEFAULT_SERVO_PULSE_WIDTH       1500
 #define REFRESH_INTERVAL 		20000
 
-#define SERVO_NUM                       6
+#define SERVO_NUM                       1
+
+#define F_CPU                           16000000
 
 /*
  * Initializes PortD to be used as controller signals for 6 servos

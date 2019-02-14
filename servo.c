@@ -7,6 +7,7 @@ volatile uint32_t ticksPerMicrosecond;
 uint32_t curServo;
 uint32_t servoPulse[SERVO_NUM];
 uint32_t enable[SERVO_NUM];
+uint32_t remainderPulse;
 
 void timer2A_Init() {
   SYSCTL_RCGCTIMER_R |= SYSCTL_RCGCTIMER_R2;    //use timer2A
@@ -41,6 +42,7 @@ void servo_Init() {
     servoPulse[i] = DEFAULT_SERVO_PULSE_WIDTH;
     enable[i] = 1;
   }
+  curServo = 0;
   ticksPerMicrosecond = F_CPU / 1000000;
 }
 
@@ -76,8 +78,8 @@ void Timer2A_Handler() {
     TIMER2_TAILR_R = ticksPerMicrosecond * remainderPulse;  
   }
   
-  if (curServo > 0 && enable[curServo]) {
-    GPIO_PORTD_DATA_R ~= (1<<curServo);
+  if (curServo > 0 && enable[curServo - 1]) {
+    GPIO_PORTD_DATA_R != ~(1<<(curServo - 1));
   }
   
   if (curServo < SERVO_NUM) {
