@@ -4,6 +4,9 @@
 #include "inc/tm4c123gh6pm.h"
 #include "servo.h"
 
+#define SERVO_MAX 140
+#define SERVO_MIN 45
+
 volatile uint32_t ticksPerMicrosecond;
 uint32_t curServo;
 uint32_t servoPulse[SERVO_NUM];
@@ -60,8 +63,8 @@ void servo_Init() {
 
 void servo_write(uint32_t index, uint32_t val) {
   if (val < MIN_SERVO_PULSE_WIDTH) {
-    //if(val < 0) {val = 0;}
-    if(val > 180) {val = 180;}
+    if(val < SERVO_MIN) {val = SERVO_MIN;}
+    if(val > SERVO_MAX) {val = SERVO_MAX;}
     val = val * (MAX_SERVO_PULSE_WIDTH - MIN_SERVO_PULSE_WIDTH) / 180 + MIN_SERVO_PULSE_WIDTH;
     //printf("%d\n", val);
     servoPulse[index] = val;
