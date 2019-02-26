@@ -4,9 +4,6 @@
 #include "inc/tm4c123gh6pm.h"
 #include "servo.h"
 
-#define SERVO_MAX 140
-#define SERVO_MIN 45
-
 volatile uint32_t ticksPerMicrosecond;
 uint32_t curServo;
 uint32_t servoPulse[SERVO_NUM];
