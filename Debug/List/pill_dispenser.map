@@ -1,32 +1,33 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.32.2.178/W32 for ARM                  10/Mar/2019  15:49:35
+# IAR ELF Linker V8.32.2.178/W32 for ARM                  11/Mar/2019  09:01:03
 # Copyright 2007-2018 IAR Systems AB.
 #
 #    Output file  =  
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Exe\pill_dispenser.out
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Exe\pill_dispenser.out
 #    Map file     =  
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\List\pill_dispenser.map
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\List\pill_dispenser.map
 #    Command line =  
-#        -f C:\Users\varit\AppData\Local\Temp\EWECC3.tmp
-#        (C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\cstartup_M.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\gpio.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\interrupt.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\pillslot.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\PLL.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\servo.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\servoTest.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\SSD2119.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\sysctl.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\systick.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\timer.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\uart.o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj\udma.o
+#        -f C:\Users\varit\AppData\Local\Temp\EW3CE5.tmp
+#        (C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\cstartup_M.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\gpio.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\interrupt.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\LCD_display.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\main.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\pillslot.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\servo.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\SSD2119.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\sysctl.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\systick.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\timer.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\uart.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\uart_pd.o
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj\udma.o
 #        --no_out_extension -o
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Exe\pill_dispenser.out
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Exe\pill_dispenser.out
 #        --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb
 #        --map
-#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\List\pill_dispenser.map
+#        C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\List\pill_dispenser.map
 #        --config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
 #        8.2\arm\config\linker\TexasInstruments\TM4C123GH6.icf" --semihosting
 #        --entry __iar_program_start --vfe --text_out locale)
@@ -61,69 +62,127 @@ define block CSTACK with size = 4K, alignment = 8 { };
 define block HEAP with size = 8K, alignment = 8 { };
 "P2":  place in [from 0x2000'0000 to 0x2000'7fff] {
           rw, block CSTACK, block HEAP };
+initialize by copy { rw };
 
-  Section          Kind         Address    Size  Object
-  -------          ----         -------    ----  ------
-"A0":                                      0xbc
-  .intvec          const            0x0    0xbc  cstartup_M.o [1]
-                                 - 0xbc    0xbc
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                        0xbc
+  .intvec            const            0x0    0xbc  cstartup_M.o [1]
+                                   - 0xbc    0xbc
 
-"P1":                                     0x868
-  .text            ro code         0xbc   0x3d8  SSD2119.o [1]
-  .text            ro code        0x494   0x218  servo.o [1]
-  .text            ro code        0x6ac   0x172  servoTest.o [1]
-  .text            ro code        0x81e    0x3a  zero_init3.o [4]
-  .text            ro code        0x858    0x28  data_init.o [4]
-  .text            ro code        0x880    0x22  fpinit_M.o [3]
-  .iar.init_table  const          0x8a4    0x10  - Linker created -
-  .text            ro code        0x8b4     0x2  cstartup_M.o [1]
-  .text            ro code        0x8b8    0x1e  cmain.o [4]
-  .text            ro code        0x8d6     0x4  low_level_init.o [2]
-  .text            ro code        0x8da     0x4  exit.o [2]
-  .text            ro code        0x8de     0x2  cstartup_M.o [1]
-  .text            ro code        0x8e0     0xa  cexit.o [4]
-  .text            ro code        0x8ea     0x2  cstartup_M.o [1]
-  .text            ro code        0x8ec    0x14  exit.o [5]
-  .text            ro code        0x900    0x10  cstartup_M.o [1]
-  .text            ro code        0x910     0x2  cstartup_M.o [1]
-  .text            ro code        0x912     0x2  cstartup_M.o [1]
-  .text            ro code        0x914     0x2  cstartup_M.o [1]
-  .text            ro code        0x916     0x2  cstartup_M.o [1]
-  .text            ro code        0x918     0x2  cstartup_M.o [1]
-  .text            ro code        0x91a     0x2  cstartup_M.o [1]
-  .text            ro code        0x91c     0x2  cstartup_M.o [1]
-  .text            ro code        0x91e     0x2  cstartup_M.o [1]
-  .text            ro code        0x920     0x2  cstartup_M.o [1]
-  .text            ro code        0x922     0x2  cstartup_M.o [1]
-  .rodata          const          0x924     0x0  zero_init3.o [4]
-                                - 0x924   0x868
+"P1":                                      0x2dc5
+  .text              ro code         0xbc   0xc70  SSD2119.o [1]
+  .text              ro code        0xd2c    0x76  ABImemcpy_unaligned.o [4]
+  .text              ro code        0xda2    0x3a  zero_init3.o [4]
+  .text              ro code        0xddc   0x8b8  LCD_display.o [1]
+  .text              ro code       0x1694   0x18c  pillslot.o [1]
+  .text              ro code       0x1820    0x22  S32ToDbl.o [3]
+  .rodata            const         0x1842     0x2  LCD_display.o [1]
+  .text              ro code       0x1844   0x17a  DblAdd.o [3]
+  .text              ro code       0x19be     0x2  cstartup_M.o [1]
+  .text              ro code       0x19c0    0x3a  DblToS32.o [3]
+  .text              ro code       0x19fa     0x2  cstartup_M.o [1]
+  .text              ro code       0x19fc    0x2e  DblCmpLe.o [3]
+  .text              ro code       0x1a2a   0x4cc  qsort.o [2]
+  .text              ro code       0x1ef6     0x2  cstartup_M.o [1]
+  .text              ro code       0x1ef8    0xe2  DblSub.o [3]
+  .text              ro code       0x1fda     0x2  cstartup_M.o [1]
+  .text              ro code       0x1fdc    0x78  ABImemmove_unaligned.o [4]
+  .text              ro code       0x2054   0x278  main.o [1]
+  .text              ro code       0x22cc   0x1ac  uart_pd.o [1]
+  .text              ro code       0x2478   0x21c  servo.o [1]
+  .text              ro code       0x2694   0x1a2  DblMul.o [3]
+  .text              ro code       0x2836     0x2  cstartup_M.o [1]
+  .text              ro code       0x2838   0x246  DblDiv.o [3]
+  .text              ro code       0x2a7e     0x2  cstartup_M.o [1]
+  .rodata            const         0x2a80   0x1e0  SSD2119.o [1]
+  .text              ro code       0x2c60    0x38  packbits_init_single.o [4]
+  .text              ro code       0x2c98    0x28  data_init.o [4]
+  .text              ro code       0x2cc0    0x22  fpinit_M.o [3]
+  .iar.init_table    const         0x2ce4    0x20  - Linker created -
+  .text              ro code       0x2d04     0x2  cstartup_M.o [1]
+  .text              ro code       0x2d08    0x1e  cmain.o [4]
+  .text              ro code       0x2d26     0x4  low_level_init.o [2]
+  .text              ro code       0x2d2a     0x4  exit.o [2]
+  .text              ro code       0x2d2e     0x2  cstartup_M.o [1]
+  .text              ro code       0x2d30     0xa  cexit.o [4]
+  .text              ro code       0x2d3a     0x2  cstartup_M.o [1]
+  .text              ro code       0x2d3c    0x14  exit.o [5]
+  .rodata            const         0x2d50    0x1c  SSD2119.o [1]
+  .rodata            const         0x2d6c    0x10  LCD_display.o [1]
+  .rodata            const         0x2d7c    0x10  LCD_display.o [1]
+  .rodata            const         0x2d8c    0x10  LCD_display.o [1]
+  .text              ro code       0x2d9c    0x10  cstartup_M.o [1]
+  .rodata            const         0x2dac     0xc  LCD_display.o [1]
+  .rodata            const         0x2db8     0xc  LCD_display.o [1]
+  .rodata            const         0x2dc4     0xc  LCD_display.o [1]
+  .rodata            const         0x2dd0     0xc  LCD_display.o [1]
+  .rodata            const         0x2ddc     0xc  LCD_display.o [1]
+  .rodata            const         0x2de8     0x8  LCD_display.o [1]
+  .rodata            const         0x2df0     0x8  LCD_display.o [1]
+  .rodata            const         0x2df8     0x8  LCD_display.o [1]
+  .rodata            const         0x2e00     0x8  LCD_display.o [1]
+  .rodata            const         0x2e08     0x8  LCD_display.o [1]
+  .rodata            const         0x2e10     0x8  LCD_display.o [1]
+  .rodata            const         0x2e18     0x8  SSD2119.o [1]
+  .rodata            const         0x2e20     0x4  LCD_display.o [1]
+  .rodata            const         0x2e24     0x4  LCD_display.o [1]
+  .rodata            const         0x2e28     0x4  LCD_display.o [1]
+  .rodata            const         0x2e2c     0x4  LCD_display.o [1]
+  .rodata            const         0x2e30     0x4  LCD_display.o [1]
+  .rodata            const         0x2e34     0x4  main.o [1]
+  .rodata            const         0x2e38     0x4  main.o [1]
+  .rodata            const         0x2e3c     0x4  SSD2119.o [1]
+  .rodata            const         0x2e40     0x4  SSD2119.o [1]
+  .rodata            const         0x2e44     0x4  SSD2119.o [1]
+  .text              ro code       0x2e48     0x2  cstartup_M.o [1]
+  .text              ro code       0x2e4a     0x2  cstartup_M.o [1]
+  .text              ro code       0x2e4c     0x2  cstartup_M.o [1]
+  .text              ro code       0x2e4e     0x2  cstartup_M.o [1]
+  .rodata            const         0x2e50     0x0  zero_init3.o [4]
+  .rodata            const         0x2e50     0x0  packbits_init_single.o [4]
+  Initializer bytes  const         0x2e50    0x31  <for P2-1>
+                                 - 0x2e81  0x2dc5
 
-"P2", part 1 of 2:                         0x2c
-  .bss             zero     0x2000'0000     0x8  servo.o [1]
-  .bss             zero     0x2000'0008     0x8  servo.o [1]
-  .bss             zero     0x2000'0010     0x4  servo.o [1]
-  .bss             zero     0x2000'0014     0x4  servo.o [1]
-  .bss             zero     0x2000'0018     0x4  servo.o [1]
-  .bss             zero     0x2000'001c     0x4  servoTest.o [1]
-  .bss             zero     0x2000'0020     0x2  SSD2119.o [1]
-  .bss             zero     0x2000'0022     0x2  SSD2119.o [1]
-  .bss             zero     0x2000'0024     0x2  SSD2119.o [1]
-  .bss             zero     0x2000'0026     0x2  SSD2119.o [1]
-  .bss             zero     0x2000'0028     0x2  SSD2119.o [1]
-                          - 0x2000'002a    0x2a
+"P2", part 1 of 3:                           0x55
+  P2-1                        0x2000'0000    0x55  <Init block>
+    .data            inited   0x2000'0000    0x48  LCD_display.o [1]
+    .data            inited   0x2000'0048     0x4  LCD_display.o [1]
+    .data            inited   0x2000'004c     0x4  uart_pd.o [1]
+    .data            inited   0x2000'0050     0x4  uart_pd.o [1]
+    .data            inited   0x2000'0054     0x1  LCD_display.o [1]
+                            - 0x2000'0055    0x55
 
-"P2", part 2 of 2:                       0x1000
-  CSTACK                    0x2000'0030  0x1000  <Block>
-    CSTACK         uninit   0x2000'0030  0x1000  <Block tail>
-                          - 0x2000'1030  0x1000
+"P2", part 2 of 3:                          0x188
+  .bss               zero     0x2000'0058   0x150  pillslot.o [1]
+  .bss               zero     0x2000'01a8     0x8  servo.o [1]
+  .bss               zero     0x2000'01b0     0x8  servo.o [1]
+  .bss               zero     0x2000'01b8     0x4  LCD_display.o [1]
+  .bss               zero     0x2000'01bc     0x4  LCD_display.o [1]
+  .bss               zero     0x2000'01c0     0x4  LCD_display.o [1]
+  .bss               zero     0x2000'01c4     0x4  pillslot.o [1]
+  .bss               zero     0x2000'01c8     0x4  servo.o [1]
+  .bss               zero     0x2000'01cc     0x4  servo.o [1]
+  .bss               zero     0x2000'01d0     0x4  servo.o [1]
+  .bss               zero     0x2000'01d4     0x2  SSD2119.o [1]
+  .bss               zero     0x2000'01d6     0x2  SSD2119.o [1]
+  .bss               zero     0x2000'01d8     0x2  SSD2119.o [1]
+  .bss               zero     0x2000'01da     0x2  SSD2119.o [1]
+  .bss               zero     0x2000'01dc     0x2  SSD2119.o [1]
+                            - 0x2000'01de   0x186
+
+"P2", part 3 of 3:                         0x1000
+  CSTACK                      0x2000'01e0  0x1000  <Block>
+    CSTACK           uninit   0x2000'01e0  0x1000  <Block tail>
+                            - 0x2000'11e0  0x1000
 
 Unused ranges:
 
          From           To      Size
          ----           --      ----
-        0x924     0x3'ffff  0x3'f6dc
-  0x2000'002c  0x2000'002f       0x4
-  0x2000'1030  0x2000'7fff    0x6fd0
+       0x2e81     0x3'ffff  0x3'd17f
+  0x2000'0055  0x2000'0057       0x3
+  0x2000'11e0  0x2000'7fff    0x6e20
 
 
 *******************************************************************************
@@ -133,8 +192,14 @@ Unused ranges:
           Address      Size
           -------      ----
 Zero (__iar_zero_init3)
-    1 destination range, total size 0x2a:
-          0x2000'0000  0x2a
+    1 destination range, total size 0x186:
+          0x2000'0058  0x186
+
+Copy/packbits (__iar_packbits_init_single3)
+    1 source range, total size 0x31 (57% of destination):
+               0x2e50   0x31
+    1 destination range, total size 0x55:
+          0x2000'0000   0x55
 
 
 
@@ -142,121 +207,221 @@ Zero (__iar_zero_init3)
 *** MODULE SUMMARY
 ***
 
-    Module            ro code  ro data  rw data
-    ------            -------  -------  -------
+    Module                  ro code  ro data  rw data
+    ------                  -------  -------  -------
 command line/config:
-    -------------------------------------------
+    -------------------------------------------------
     Total:
 
-C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj: [1]
-    SSD2119.o             984                10
-    cstartup_M.o           42      188
-    servo.o               536                28
-    servoTest.o           370                 4
-    -------------------------------------------
-    Total:              1 932      188       42
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj: [1]
+    LCD_display.o             2 232      221       89
+    SSD2119.o                 3 184      528       10
+    cstartup_M.o                 42      188
+    main.o                      632        8
+    pillslot.o                  396               340
+    servo.o                     540                28
+    uart_pd.o                   428        5        8
+    -------------------------------------------------
+    Total:                    7 454      950      475
 
 dl7M_tln.a: [2]
-    exit.o                  4
-    low_level_init.o        4
-    -------------------------------------------
-    Total:                  8
+    exit.o                        4
+    low_level_init.o              4
+    qsort.o                   1 228
+    -------------------------------------------------
+    Total:                    1 236
 
 m7M_tls.a: [3]
-    fpinit_M.o             34
-    -------------------------------------------
-    Total:                 34
+    DblAdd.o                    378
+    DblCmpLe.o                   46
+    DblDiv.o                    582
+    DblMul.o                    418
+    DblSub.o                    226
+    DblToS32.o                   58
+    S32ToDbl.o                   34
+    fpinit_M.o                   34
+    -------------------------------------------------
+    Total:                    1 776
 
 rt7M_tl.a: [4]
-    cexit.o                10
-    cmain.o                30
-    data_init.o            40
-    zero_init3.o           58
-    -------------------------------------------
-    Total:                138
+    ABImemcpy_unaligned.o       118
+    ABImemmove_unaligned.o      120
+    cexit.o                      10
+    cmain.o                      30
+    data_init.o                  40
+    packbits_init_single.o       56
+    zero_init3.o                 58
+    -------------------------------------------------
+    Total:                      432
 
 shb_l.a: [5]
-    exit.o                 20
-    -------------------------------------------
-    Total:                 20
+    exit.o                       20
+    -------------------------------------------------
+    Total:                       20
 
-    Gaps                    2        2
-    Linker created                  16    4 096
------------------------------------------------
-    Grand Total:        2 134      206    4 138
+    Gaps                          2        2
+    Linker created                        33    4 096
+-----------------------------------------------------
+    Grand Total:             10 920      985    4 571
 
 
 *******************************************************************************
 *** ENTRY LIST
 ***
 
-Entry                       Address  Size  Type      Object
------                       -------  ----  ----      ------
-.iar.init_table$$Base         0x8a4         --   Gb  - Linker created -
-.iar.init_table$$Limit        0x8b4         --   Gb  - Linker created -
-?main                         0x8b9        Code  Gb  cmain.o [4]
-ADC_Read                      0x225  0x26  Code  Gb  SSD2119.o [1]
-ADC_SetChannel                0x24b  0x30  Code  Gb  SSD2119.o [1]
-CSTACK$$Base            0x2000'0030         --   Gb  - Linker created -
-CSTACK$$Limit           0x2000'1030         --   Gb  - Linker created -
-GPIOPortA_Handler             0x405  0x46  Code  Gb  SSD2119.o [1]
-LCD_DrawFilledRect            0x1bd  0x62  Code  Gb  SSD2119.o [1]
-LCD_Goto                      0x175  0x2e  Code  Gb  SSD2119.o [1]
-LCD_SetCursor                 0x167   0xe  Code  Gb  SSD2119.o [1]
-LCD_SetTextColor              0x1a3  0x14  Code  Gb  SSD2119.o [1]
-LCD_WriteCommand               0xbd  0x42  Code  Gb  SSD2119.o [1]
-LCD_WriteData                  0xff  0x48  Code  Gb  SSD2119.o [1]
-PortF_Init                    0x70b  0x42  Code  Gb  servoTest.o [1]
-Region$$Table$$Base           0x8a4         --   Gb  - Linker created -
-Region$$Table$$Limit          0x8b4         --   Gb  - Linker created -
-Timer2A_Handler               0x5c3  0x8c  Code  Gb  servo.o [1]
-Touch_ReadX                   0x281  0xd0  Code  Gb  SSD2119.o [1]
-Touch_ReadY                   0x359  0xac  Code  Gb  SSD2119.o [1]
-Touch_XVal              0x2000'0026   0x2  Data  Gb  SSD2119.o [1]
-Touch_YVal              0x2000'0028   0x2  Data  Gb  SSD2119.o [1]
-__cmain                       0x8b9        Code  Gb  cmain.o [4]
-__exit                        0x8ed  0x14  Code  Gb  exit.o [5]
-__iar_data_init3              0x859  0x28  Code  Gb  data_init.o [4]
-__iar_init_vfp                0x881        Code  Gb  fpinit_M.o [3]
-__iar_program_start           0x901  0x10  Code  Gb  cstartup_M.o [1]
-__iar_zero_init3              0x81f  0x3a  Code  Gb  zero_init3.o [4]
-__low_level_init              0x8d7   0x4  Code  Gb  low_level_init.o [2]
-__vector_table                  0x0  0xbc  Data  Gb  cstartup_M.o [1]
-_call_main                    0x8c5        Code  Gb  cmain.o [4]
-_exit                         0x8e1        Code  Gb  cexit.o [4]
-_main                         0x8d3        Code  Gb  cmain.o [4]
-calcuatePeriod                0x547  0x20  Code  Gb  servo.o [1]
-convertColor                  0x147  0x20  Code  Gb  SSD2119.o [1]
-curServo                0x2000'0014   0x4  Data  Gb  servo.o [1]
-cursorX                 0x2000'0020   0x2  Data  Gb  SSD2119.o [1]
-cursorY                 0x2000'0022   0x2  Data  Gb  SSD2119.o [1]
-enable                  0x2000'0008   0x8  Data  Gb  servo.o [1]
-exit                          0x8db   0x4  Code  Gb  exit.o [2]
-foo                           0x76f  0x3a  Code  Gb  servoTest.o [1]
-main                          0x7e9  0x36  Code  Gb  servoTest.o [1]
-pll_Init                      0x6ad  0x5e  Code  Gb  servoTest.o [1]
-portD_Init                    0x4eb  0x5c  Code  Gb  servo.o [1]
-remainderPulse          0x2000'0018   0x4  Data  Gb  servo.o [1]
-servoPulse              0x2000'0000   0x8  Data  Gb  servo.o [1]
-servo_Init                    0x567  0x38  Code  Gb  servo.o [1]
-servo_write                   0x59f  0x24  Code  Gb  servo.o [1]
-setLED                        0x757  0x18  Code  Gb  servoTest.o [1]
-sw1_input                     0x74d   0xa  Code  Gb  servoTest.o [1]
-textColor               0x2000'0024   0x2  Data  Gb  SSD2119.o [1]
-ticksPerMicrosecond     0x2000'0010   0x4  Data  Gb  servo.o [1]
-timer2A_Init                  0x495  0x56  Code  Gb  servo.o [1]
-turn                    0x2000'001c   0x4  Data  Gb  servoTest.o [1]
+Entry                       Address   Size  Type      Object
+-----                       -------   ----  ----      ------
+.iar.init_table$$Base        0x2ce4          --   Gb  - Linker created -
+.iar.init_table$$Limit       0x2d04          --   Gb  - Linker created -
+?main                        0x2d09         Code  Gb  cmain.o [4]
+ADC_Init                      0x9b3   0x80  Code  Gb  SSD2119.o [1]
+ADC_Read                      0xa33   0x26  Code  Gb  SSD2119.o [1]
+ADC_SetChannel                0xa5d   0x30  Code  Gb  SSD2119.o [1]
+ASCII                        0x2a80  0x1e0  Data  Lc  SSD2119.o [1]
+CSTACK$$Base            0x2000'01e0          --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'11e0          --   Gb  - Linker created -
+Draw_Button                   0xe81   0x5e  Code  Gb  LCD_display.o [1]
+Draw_ButtonFrame              0xe5f   0x22  Code  Gb  LCD_display.o [1]
+Draw_Header                   0xddd   0x64  Code  Gb  LCD_display.o [1]
+Draw_Next                     0xf13   0xb8  Code  Gb  LCD_display.o [1]
+Draw_Pill                    0x1315   0x74  Code  Gb  LCD_display.o [1]
+Draw_SlotFrame               0x10fb  0x116  Code  Gb  LCD_display.o [1]
+Draw_Slots                   0x1215  0x100  Code  Gb  LCD_display.o [1]
+GPIOPortA_Handler             0xc75   0x46  Code  Gb  SSD2119.o [1]
+LCD_ColorFill                 0x385   0x16  Code  Gb  SSD2119.o [1]
+LCD_DrawFilledRect            0x90d   0x62  Code  Gb  SSD2119.o [1]
+LCD_DrawLine                  0x7a7   0xdc  Code  Gb  SSD2119.o [1]
+LCD_DrawPixel                 0x773   0x34  Code  Gb  SSD2119.o [1]
+LCD_DrawRect                  0x883   0x8a  Code  Gb  SSD2119.o [1]
+LCD_GPIOInit                   0xbd   0x7c  Code  Gb  SSD2119.o [1]
+LCD_Goto                      0x4a7   0x2e  Code  Gb  SSD2119.o [1]
+LCD_Init                      0x1c3  0x1a2  Code  Gb  SSD2119.o [1]
+LCD_PrintBinary               0x6b1   0x9e  Code  Gb  SSD2119.o [1]
+LCD_PrintChar                 0x3a5   0xd4  Code  Gb  SSD2119.o [1]
+LCD_PrintFloat                0x771    0x2  Code  Gb  SSD2119.o [1]
+LCD_PrintHex                  0x635   0x7c  Code  Gb  SSD2119.o [1]
+LCD_PrintInteger              0x5cb   0x6a  Code  Gb  SSD2119.o [1]
+LCD_PrintString               0x479   0x20  Code  Gb  SSD2119.o [1]
+LCD_SetCursor                 0x499    0xe  Code  Gb  SSD2119.o [1]
+LCD_SetTextColor              0x4d5   0x14  Code  Gb  SSD2119.o [1]
+LCD_WriteCommand              0x139   0x42  Code  Gb  SSD2119.o [1]
+LCD_WriteData                 0x17b   0x48  Code  Gb  SSD2119.o [1]
+PLL_Init                     0x21af   0x5e  Code  Gb  main.o [1]
+Region$$Table$$Base          0x2ce4          --   Gb  - Linker created -
+Region$$Table$$Limit         0x2d04          --   Gb  - Linker created -
+ResetTimer0                  0x2089    0xc  Code  Gb  main.o [1]
+SLOT_COLOR              0x2000'0000   0x48  Data  Gb  LCD_display.o [1]
+StartTimer0                  0x207d    0xc  Code  Gb  main.o [1]
+Timeout0                     0x209b    0xa  Code  Gb  main.o [1]
+Timer0_Init                  0x2055   0x28  Code  Gb  main.o [1]
+Timer2A_Handler              0x25ad   0x8c  Code  Gb  servo.o [1]
+Touch_GetCoords               0xc21   0x4e  Code  Gb  SSD2119.o [1]
+Touch_Init                    0x975   0x3e  Code  Gb  SSD2119.o [1]
+Touch_ReadX                   0xa91   0xd0  Code  Gb  SSD2119.o [1]
+Touch_ReadY                   0xb69   0xac  Code  Gb  SSD2119.o [1]
+Touch_XVal              0x2000'01da    0x2  Data  Gb  SSD2119.o [1]
+Touch_YVal              0x2000'01dc    0x2  Data  Gb  SSD2119.o [1]
+__aeabi_cdcmple              0x19fd         Code  Gb  DblCmpLe.o [3]
+__aeabi_d2iz                 0x19c1         Code  Gb  DblToS32.o [3]
+__aeabi_dadd                 0x1845         Code  Gb  DblAdd.o [3]
+__aeabi_ddiv                 0x2839         Code  Gb  DblDiv.o [3]
+__aeabi_dmul                 0x2695         Code  Gb  DblMul.o [3]
+__aeabi_dsub                 0x1ef9         Code  Gb  DblSub.o [3]
+__aeabi_i2d                  0x1821         Code  Gb  S32ToDbl.o [3]
+__cmain                      0x2d09         Code  Gb  cmain.o [4]
+__exit                       0x2d3d   0x14  Code  Gb  exit.o [5]
+__iar_dadd                   0x1f09         Code  Gb  DblSub.o [3]
+__iar_data_init3             0x2c99   0x28  Code  Gb  data_init.o [4]
+__iar_dsub                   0x1855         Code  Gb  DblAdd.o [3]
+__iar_dsubStart              0x1867         Code  Gb  DblAdd.o [3]
+__iar_init_vfp               0x2cc1         Code  Gb  fpinit_M.o [3]
+__iar_packbits_init_single3
+                             0x2c61   0x38  Code  Gb  packbits_init_single.o [4]
+__iar_program_start          0x2d9d   0x10  Code  Gb  cstartup_M.o [1]
+__iar_unaligned_memcpy        0xd2d         Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned_memcpy4
+                              0xd4d         Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned_memcpy8
+                              0xd4d         Code  Gb  ABImemcpy_unaligned.o [4]
+__iar_unaligned_memmove
+                             0x1fdd         Code  Gb  ABImemmove_unaligned.o [4]
+__iar_unaligned_memmove4
+                             0x1fdd         Code  Gb  ABImemmove_unaligned.o [4]
+__iar_unaligned_memmove8
+                             0x1fdd         Code  Gb  ABImemmove_unaligned.o [4]
+__iar_zero_init3              0xda3   0x3a  Code  Gb  zero_init3.o [4]
+__low_level_init             0x2d27    0x4  Code  Gb  low_level_init.o [2]
+__vector_table                  0x0   0xbc  Data  Gb  cstartup_M.o [1]
+_call_main                   0x2d15         Code  Gb  cmain.o [4]
+_exit                        0x2d31         Code  Gb  cexit.o [4]
+_main                        0x2d23         Code  Gb  cmain.o [4]
+abs                           0x39b    0xa  Code  Gb  SSD2119.o [1]
+addTime                      0x16db   0x5a  Code  Gb  pillslot.o [1]
+adjust_heap                  0x1b89   0x86  Code  Lc  qsort.o [2]
+baud_rate               0x2000'0050    0x4  Data  Gb  uart_pd.o [1]
+buttonPressPill              0x1455   0x3e  Code  Gb  LCD_display.o [1]
+buttonPressSlot              0x1389   0xc0  Code  Gb  LCD_display.o [1]
+calcuatePeriod               0x252b   0x20  Code  Gb  servo.o [1]
+clock_rate              0x2000'004c    0x4  Data  Gb  uart_pd.o [1]
+compare                      0x16c1   0x1a  Code  Gb  pillslot.o [1]
+convertColor                  0x365   0x20  Code  Gb  SSD2119.o [1]
+curServo                0x2000'01cc    0x4  Data  Gb  servo.o [1]
+cursorX                 0x2000'01d4    0x2  Data  Gb  SSD2119.o [1]
+cursorY                 0x2000'01d6    0x2  Data  Gb  SSD2119.o [1]
+dispense                     0x2177   0x38  Code  Gb  main.o [1]
+dispensePill                 0x1735   0x4e  Code  Gb  pillslot.o [1]
+enable                  0x2000'01b0    0x8  Data  Gb  servo.o [1]
+exit                         0x2d2b    0x4  Code  Gb  exit.o [2]
+getNextPill                  0x1795   0x7e  Code  Gb  pillslot.o [1]
+getPill                      0x1783   0x12  Code  Gb  pillslot.o [1]
+get_fbrd                     0x2305   0x6c  Code  Gb  uart_pd.o [1]
+get_ibrd                     0x22cd   0x38  Code  Gb  uart_pd.o [1]
+intro_sort                   0x1c0f  0x2d0  Code  Lc  qsort.o [2]
+main                         0x220d   0x8c  Code  Gb  main.o [1]
+med3                         0x1b39   0x50  Code  Lc  qsort.o [2]
+page                    0x2000'0054    0x1  Data  Gb  LCD_display.o [1]
+pills                   0x2000'0058  0x150  Data  Gb  pillslot.o [1]
+portD_Init                   0x24cf   0x5c  Code  Gb  servo.o [1]
+prevX                   0x2000'01b8    0x4  Data  Gb  LCD_display.o [1]
+prevY                   0x2000'01bc    0x4  Data  Gb  LCD_display.o [1]
+printPill                     0xfcb  0x130  Code  Gb  LCD_display.o [1]
+printTime                     0xedf   0x34  Code  Gb  LCD_display.o [1]
+printf                        0x4e9   0xe2  Code  Gb  SSD2119.o [1]
+px2Char                       0xe41   0x1e  Code  Gb  LCD_display.o [1]
+qsort                        0x1edf   0x18  Code  Gb  qsort.o [2]
+readCoor                     0x1493   0xd4  Code  Gb  LCD_display.o [1]
+remainderPulse          0x2000'01d0    0x4  Data  Gb  servo.o [1]
+rot3                         0x1a81   0x68  Code  Lc  qsort.o [2]
+rotate                       0x1aef   0x4a  Code  Lc  qsort.o [2]
+servoPulse              0x2000'01a8    0x8  Data  Gb  servo.o [1]
+servo_Init                   0x254b   0x38  Code  Gb  servo.o [1]
+servo_write                  0x2583   0x2a  Code  Gb  servo.o [1]
+setSlot                      0x1695   0x2c  Code  Gb  pillslot.o [1]
+setTime0                     0x2095    0x6  Code  Gb  main.o [1]
+slotNum                 0x2000'0048    0x4  Data  Gb  LCD_display.o [1]
+slotSize                0x2000'01c4    0x4  Data  Gb  pillslot.o [1]
+swap                         0x1a2b   0x56  Code  Lc  qsort.o [2]
+switchPage                   0x1567   0xb2  Code  Gb  LCD_display.o [1]
+textColor               0x2000'01d8    0x2  Data  Gb  SSD2119.o [1]
+ticksPerMicrosecond     0x2000'01c8    0x4  Data  Gb  servo.o [1]
+timer2A_Init                 0x2479   0x56  Code  Gb  servo.o [1]
+touch                   0x2000'01c0    0x4  Data  Gb  LCD_display.o [1]
+uart1_Init                   0x2371   0x88  Code  Gb  uart_pd.o [1]
+uart1_inchar                 0x2409   0x10  Code  Gb  uart_pd.o [1]
+uart1_inchar_non_block       0x2419   0x14  Code  Gb  uart_pd.o [1]
+uart1_outchar                0x23f9   0x10  Code  Gb  uart_pd.o [1]
+updatePill                   0x20a5   0xd2  Code  Gb  main.o [1]
 
 
-[1] = C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\Debug\Obj
+[1] = C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\Debug\Obj
 [2] = dl7M_tln.a
 [3] = m7M_tls.a
 [4] = rt7M_tl.a
 [5] = shb_l.a
 
-  2 134 bytes of readonly  code memory
-    206 bytes of readonly  data memory
-  4 138 bytes of readwrite data memory
+  10 920 bytes of readonly  code memory
+     985 bytes of readonly  data memory
+   4 571 bytes of readwrite data memory
 
 Errors: none
 Warnings: none

@@ -2432,4 +2432,7 @@
     <file>
         <name>$PROJ_DIR$\startup.s</name>
     </file>
+    <file>
+        <name>$PROJ_DIR$\uart_pd.c</name>
+    </file>
 </project>

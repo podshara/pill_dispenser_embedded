@@ -2105,15 +2105,9 @@
     </file>
     <file>
         <name>$PROJ_DIR$\LCD_display.c</name>
-        <excluded>
-            <configuration>Debug</configuration>
-        </excluded>
     </file>
     <file>
         <name>$PROJ_DIR$\main.c</name>
-        <excluded>
-            <configuration>Debug</configuration>
-        </excluded>
     </file>
     <file>
         <name>$PROJ_DIR$\pillslot.c</name>
@@ -2123,6 +2117,9 @@
     </file>
     <file>
         <name>$PROJ_DIR$\PLL.c</name>
+        <excluded>
+            <configuration>Debug</configuration>
+        </excluded>
     </file>
     <file>
         <name>$PROJ_DIR$\schedule.c</name>
@@ -2144,6 +2141,9 @@
     </file>
     <file>
         <name>$PROJ_DIR$\servoTest.c</name>
+        <excluded>
+            <configuration>Debug</configuration>
+        </excluded>
     </file>
     <file>
         <name>$PROJ_DIR$\SSD2119.c</name>
@@ -2153,5 +2153,8 @@
         <excluded>
             <configuration>Debug</configuration>
         </excluded>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\uart_pd.c</name>
     </file>
 </project>

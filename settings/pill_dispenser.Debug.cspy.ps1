@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\common\bin\cspybat" -f "C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\settings\pill_dispenser.Debug.general.xcl" --backend -f "C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\settings\pill_dispenser.Debug.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\common\bin\cspybat" -f "C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\settings\pill_dispenser.Debug.general.xcl" --backend -f "C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\settings\pill_dispenser.Debug.driver.xcl" 
 }
 else
 {
-& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\common\bin\cspybat" -f "C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\settings\pill_dispenser.Debug.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\settings\pill_dispenser.Debug.driver.xcl" 
+& "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\common\bin\cspybat" -f "C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\settings\pill_dispenser.Debug.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\settings\pill_dispenser.Debug.driver.xcl" 
 }

@@ -1,9 +1,9 @@
-"C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\driverlib\systick.c"
+"C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\driverlib\systick.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\driverlib
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\driverlib
 -I
 C:\ti\TivaWare_C_Series-2.1.4.178
 -I

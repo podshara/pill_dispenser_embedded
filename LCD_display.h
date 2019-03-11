@@ -34,8 +34,8 @@
 #define SLOT_BG                 convertColor(255, 253, 204)
 #define HELLO_BG                convertColor(93, 136, 204)
 
-#define VOID_X                  140
-#define VOID_Y                  150
+#define VOID_X                  80
+#define VOID_Y                  182
 
 #define VOID_OFFSET             20
 #define OFF_SET_SWITCH          30
