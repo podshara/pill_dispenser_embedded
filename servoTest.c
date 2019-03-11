@@ -76,25 +76,26 @@ int turn = 0;
 void foo(){
   if(turn){
     setLED(1);
-    servo_write(0, 45);
+    servo_write(0, 50);
     
   } else {
     setLED(0);
-    servo_write(0, 140);
+    servo_write(0, 180);
     
   }
   turn = !turn;
 }
 
 int main(){
-  Timer0_Init();
+  //Timer0_Init();
   PortF_Init();
   pll_Init();
   servo_Init();
-  
+  servo_write(0,180);
   setLED(1);
   int sw1 = 0;
   while(1){
+    
     if(sw1_input()){
       if(!sw1){
         sw1 = 1;

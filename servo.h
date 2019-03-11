@@ -10,8 +10,10 @@
 #define SERVO_NUM                       2
 
 #define F_CPU                           16000000
-#define SERVO_MAX 140
-#define SERVO_MIN 45
+#define SERVO_MAX       180
+#define SERVO_MIN       50
+//#define SERVO_MAX 140
+//#define SERVO_MIN 45
 
 /*
  * Initializes PortD to be used as controller signals for 6 servos

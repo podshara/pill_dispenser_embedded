@@ -2369,7 +2369,67 @@
             </data>
         </settings>
     </configuration>
+    <group>
+        <name>driverlib</name>
+        <file>
+            <name>$PROJ_DIR$\driverlib\gpio.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driverlib\interrupt.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driverlib\sysctl.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driverlib\systick.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driverlib\timer.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driverlib\uart.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\driverlib\udma.c</name>
+        </file>
+    </group>
+    <file>
+        <name>$PROJ_DIR$\cstartup_M.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\LCD_display.c</name>
+    </file>
     <file>
         <name>$PROJ_DIR$\main.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\pillslot.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\pillslot.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\PLL.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\schedule.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\schedule.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\servo.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\servo.h</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\servoTest.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\SSD2119.c</name>
+    </file>
+    <file>
+        <name>$PROJ_DIR$\startup.s</name>
     </file>
 </project>

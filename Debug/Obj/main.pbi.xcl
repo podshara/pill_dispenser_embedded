@@ -5,9 +5,29 @@
 -I
 C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded
 -I
+C:\ti\TivaWare_C_Series-2.1.4.178\inc
+-I
+C:\TI-CMSIS-Devices-8636\TI\LM4F\Include
+-I
+C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rvmdk
+-I
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded
+-I
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\driverlib
+-I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc\c
+-I
+C:\ti\TivaWare_C_Series-2.1.4.178\inc
+-I
+C:\TI-CMSIS-Devices-8636\TI\LM4F\Include
+-I
+C:\ti\TivaWare_C_Series-2.1.4.178\driverlib\rvmdk
+-I
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded
+-I
+C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\driverlib
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -156,7 +176,7 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc\c
 -D__UINTPTR_T_MAX__=0xffffffffU
 -D__INTPTR_SIZE_PREFIX__=""
 -D__JMP_BUF_ELEMENT_TYPE__=unsigned long long int
--D__JMP_BUF_NUM_ELEMENTS__=8
+-D__JMP_BUF_NUM_ELEMENTS__=16
 -D__TID__=0xcf60
 -D__VER__=8032002
 -D__BUILD_NUMBER__=178
@@ -193,17 +213,29 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc\c
 -D__DEF_STACK_MEM_INDEX__=0
 -D__PRAGMA_PACK_ON__=1
 -D__MULTIPLE_INHERITANCE__=1
--D__AAPCS__=1
+-D__AAPCS_VFP__=1
 -D__ARM4TM__=4
 -D__ARM5TM__=5
 -D__ARM5T__=5
 -D__ARM5__=5
+-D__ARM6MEDIA__=6
 -D__ARM6M__=11
 -D__ARM6SM__=12
 -D__ARM6T2__=6
 -D__ARM6__=6
+-D__ARM7EM__=13
 -D__ARM7M__=7
 -D__ARM7__=7
+-D__ARMVFPV1__=1
+-D__ARMVFPV2__=2
+-D__ARMVFPV3_D16__=1
+-D__ARMVFPV3_FP16__=1
+-D__ARMVFPV3__=3
+-D__ARMVFPV4__=4
+-D__ARMVFP_D16__=1
+-D__ARMVFP_FP16__=1
+-D__ARMVFP_SP__=1
+-D__ARMVFP__=__ARMVFPV4__
 -D__ARM_32BIT_STATE=1
 -D__ARM_ACLE=201
 -D__ARM_ALIGN_MAX_PWR=8
@@ -213,19 +245,24 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc\c
 -D__ARM_ARCH_PROFILE='M'
 -D__ARM_FEATURE_CLZ=1
 -D__ARM_FEATURE_COPROC=15
+-D__ARM_FEATURE_DSP=1
+-D__ARM_FEATURE_FMA=1
 -D__ARM_FEATURE_IDIV=1
 -D__ARM_FEATURE_LDREX=7
 -D__ARM_FEATURE_QBIT=1
 -D__ARM_FEATURE_SAT=1
+-D__ARM_FEATURE_SIMD32=1
 -D__ARM_FEATURE_UNALIGNED=1
+-D__ARM_FP=6
 -D__ARM_FP16_ARGS=1
 -D__ARM_FP16_FORMAT_IEEE=1
--D__ARM_PCS=1
+-D__ARM_MEDIA__=1
+-D__ARM_PCS_VFP=1
 -D__ARM_PROFILE_M__=1
 -D__ARM_SIZE_MINIMAL_ENUM=1
 -D__ARM_SIZE_WCHAR_T=4
 -D__CODE_SIZE_LIMIT=0
--D__CORE__=__ARM7M__
+-D__CORE__=__ARM7EM__
 -D__CPU_MODE__=1
 -D__ICCARM_INTRINSICS_VERSION__=2
 -D__ICCARM__=1
@@ -282,6 +319,7 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc\c
 -D__EDG_CPP11_IL_EXTENSIONS_SUPPORTED=1
 -D__EDG_FLOAT80_ENABLING_POSSIBLE=0
 -D__EDG_FLOAT128_ENABLING_POSSIBLE=0
+-Dewarm=1
 -D_DLIB_CONFIG_FILE_HEADER_NAME="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.2\\arm\\inc\\c\\DLib_Config_Normal.h"
 -D_DLIB_CONFIG_FILE_STRING="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.2\\arm\\inc\\c\\DLib_Config_Normal.h"
 -D__VERSION__="IAR ANSI C/C++ Compiler V8.32.2.178/W32 for ARM"
