@@ -1,9 +1,11 @@
-"C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\main.c"
+"C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded\main.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -I
-C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded
+C:\Users\podsh\Desktop\work\CSE_474\pill_dispenser_embedded
+-I
+C:\ti\TivaWare_C_Series-2.1.4.178
 -I
 C:\ti\TivaWare_C_Series-2.1.4.178\inc
 -I
@@ -18,6 +20,8 @@ C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_embedded\driverlib
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.2\arm\inc\c
+-I
+C:\ti\TivaWare_C_Series-2.1.4.178
 -I
 C:\ti\TivaWare_C_Series-2.1.4.178\inc
 -I

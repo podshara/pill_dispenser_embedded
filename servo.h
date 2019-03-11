@@ -12,6 +12,11 @@
 #define F_CPU                           16000000
 #define SERVO_MAX       180
 #define SERVO_MIN       50
+
+// command
+#define DISPENSE 1
+#define SERVO_READY 2
+
 //#define SERVO_MAX 140
 //#define SERVO_MIN 45
 

@@ -1,6 +1,5 @@
 #include <stdint.h>
 #include "SSD2119.h"
-#include "PLL.h"
 #include "inc/tm4c123gh6pm.h"
 #include "pillslot.h"
 #include "LCD_display.h"
@@ -8,42 +7,6 @@
 //int HR_COLOR[SCH_MAX_N][3] = {{250, 78, 78}, {134, 234, 78}};
 int SLOT_COLOR[SLOT_MAX_X * SLOT_MAX_Y][3] = 
       {{0,0,255}, {0,255,0}, {0,255,255}, {255,0,0}, {255,0,255}, {255,255,0}};
-
-//----Timer----
-void Timer0_Init(){
-  SYSCTL_RCGCTIMER_R |= SYSCTL_RCGCTIMER_R0;    //use timer 0
-  TIMER0_CTL_R &= ~TIMER_CTL_TAEN;              //disable timer
-  TIMER0_CFG_R = TIMER_CFG_32_BIT_TIMER;        //select 32 bit timer config
-  TIMER0_TAMR_R = TIMER_TAMR_TAMR_1_SHOT;       //countdown + one-shot mode
-  TIMER0_TAILR_R = F_CPU;                       //16MHz
-}
-
-void StartTimer0(){
-  TIMER0_CTL_R |= TIMER_CTL_TAEN;
-}
-
-void DisableTimer0(){
-  TIMER0_CTL_R &= ~TIMER_CTL_TAEN;
-}
-
-void ResetTimer0(){
-  TIMER0_ICR_R |= TIMER_ICR_TATOCINT;
-}
-
-void setTime0(int time){
-  TIMER0_TAILR_R = time;
-}
-
-int Timeout0(){
-  return TIMER0_RIS_R & TIMER_RIS_TATORIS;
-}
-
-void Delay(int time){
-  setTime0(F_CPU / 1000 * time);
-  StartTimer0();
-  while(!Timeout0());
-  ResetTimer0();
-}
 
 //**********************Display**********************
 void Draw_Hello(){
@@ -162,45 +125,21 @@ void printPill(int slotNum, int x, int y, int full){
     
     if(full){
       LCD_Goto(charX, charY++);
-      printf("Alarm Type: ");
-      if(pill.sch_mode == 1){
-        printf("Periodic");
-      } else if(pill.sch_mode == 0){
-        printf("Time Set");
-        LCD_Goto(charX, charY++);
-        printf("Time List: ");
-      }
-    }
-    
-    if(pill.sch_mode == 1){ //periodic mode
-      int hr = pill.period / 60;
-      int min = pill.period % 60;
+      printf("Alarm Type: ");     
+      printf("Time Set");
       LCD_Goto(charX, charY++);
-      printf("Every ");
-      if(hr > 0){
-        printf("%dh ", hr);
-      }
-      if(min > 0){
-        printf("%dm", min);
-      }
+      printf("Time List: ");
       
-      if(full){
-        for(int i = pill.time[0]; i <= pill.time[1]; i += pill.period){
-          LCD_Goto(charX + 1, charY++);
-          printTime(i);
-        }
+    }
+    for(int i = 0; i < pill.timeSize; i++){
+      if(!full && i >= 5){
+        break;
       }
-    } else if(pill.sch_mode == 0){ //timeset mode
-      for(int i = 0; i < pill.timeSize; i++){
-        if(!full && i >= 5){
-          break;
-        }
-        LCD_Goto(charX + 1, charY++);
-        printTime(pill.time[i]);
-      }
-      if(!full && pill.timeSize > 5){
-        printf(" ...");
-      }
+      LCD_Goto(charX + 1, charY++);
+      printTime(pill.time[i]);
+    }
+    if(!full && pill.timeSize > 5){
+      printf(" ...");
     }
   }
 }
@@ -290,7 +229,7 @@ int buttonPressSlot(int x, int y){
   return -1;
 }
 
-//0: up, 1: down, 2: bottom left, 3: bottom right(back), -1: ow
+//0: up, 1: down, 2: bottom right(back), -1: ow
 int buttonPressPill(int x, int y){
   if(x >= BT_X && x <= BT_X + BT_SIZE 
      && y >= SLOT_OFFSET_Y && y <= SLOT_OFFSET_Y + BT_SIZE){
@@ -305,70 +244,54 @@ int buttonPressPill(int x, int y){
   return -1;
 }
 
-int Touched = 0;
-int curX = 0, curY = 0;
 int prevX = 0, prevY = 0;
-int jump = 0;
-int voidX = 80, voidY = 181;
-int voidCount = 0;
+int touch = 0;
 
-void readCoor(int* X, int* Y, int* touch){
+void readCoor(int* touchX, int* touchY, int* touched){
   Touch_ReadX();
   Touch_ReadY();
   long coor = Touch_GetCoords();
   int x = coor >> 16;
   int y = coor & 0xFFFF;
   x = -x + 320;
-  *X = x;
-  *Y = y;
   
   LCD_Goto(0,0);
   printf("(%d, %d)", x, y);
   
-  jump = Touched && (curX > x + 20 || curX < x - 20 || curY > y + 20 || curY < y - 20);
-  
-  if((x > voidX + VOID_OFFSET || x < voidX - VOID_OFFSET 
-      || y > voidY + VOID_OFFSET || y < voidY - VOID_OFFSET) && !jump){
-    Touched = 1;
-    curX = x;
-    curY = y;
+  int jump = (touch && 
+            (prevX > x + OFF_SET_SWITCH || 
+             prevX < x - OFF_SET_SWITCH || 
+             prevY > y + OFF_SET_SWITCH || 
+             prevY < y - OFF_SET_SWITCH));
+  int pressing = x > VOID_X + VOID_OFFSET || x < VOID_X - VOID_OFFSET ||
+      y > VOID_Y + VOID_OFFSET || y < VOID_Y - VOID_OFFSET; 
+  if(pressing && !jump){
+    touch = 1;
+    prevX = x;
+    prevY = y;
+    *touchX = x;
+    *touchY = y;
   } else {
-    Touched = 0;
+    touch = 0;
+    *touchX = 0;
+    *touchY = 0;
   }
-  *touch = Touched;
   
-  LCD_Goto(0, 1);
-  if(Touched){
+  *touched = touch;
+  LCD_Goto(0,1);
+  if(*touched){
     printf("Touch");
   } else {
     printf("     ");
   }
 }
 
-void updateVoid(int x, int y){
-  if(x > prevX - VOID_OFFSET && x < prevX + VOID_OFFSET 
-     && y > prevY - VOID_OFFSET && y < prevY + VOID_OFFSET){
-    voidCount++;
-  } else {
-    voidCount = 0;
-  }
-  prevX = x;
-  prevY = y;
-  
-  if(voidCount > F_CPU * 10){
-    voidX = x;
-    voidY = y;
-  }
-}
-
-typedef enum {
-  NEXT,
-  SLOT,
-  PILL
-} PAGE;
-
 PAGE page = SLOT;
 int slotNum = -1;
+
+void set_page(PAGE input) {
+  page = input;
+}
 
 void switchPage(int x, int y){
   int button;
@@ -408,8 +331,8 @@ void switchPage(int x, int y){
 }
 
 //---------------------main---------------------------
+/*
 int main() {
-  PLL_Init();
   LCD_Init();
   Touch_Init();
   //Timer0_Init();
@@ -426,8 +349,8 @@ int main() {
   addTime(0, 5);
   addTime(0, 259);
   addTime(0, 2333);
-  setPeriod(1, 4 * 60 + 10, 6 * 60, 18 * 60);
-  setPeriod(2, 5, 0, 60);
+  //setPeriod(1, 4 * 60 + 10, 6 * 60, 18 * 60);
+  //setPeriod(2, 5, 0, 60);
   addTime(4, 5);
   
   Draw_Slots();
@@ -439,4 +362,4 @@ int main() {
       switchPage(x, y);
     }
   }
-}
+}*/

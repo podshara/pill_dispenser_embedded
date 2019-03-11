@@ -106,7 +106,7 @@ static void ServoTask(void *pvParameters){
           
           i8Message = SERVOREADY;
           
-          if(xQueueSend(g_pUARTQueue, &ui8Message, portMAX_DELAY) != pdPASS){
+          if(xQueueSend(g_pUARTQueue, &i8Message, portMAX_DELAY) != pdPASS){
               //
               // Error. The queue should never be full. If so print the
               // error message on UART and wait for ever.

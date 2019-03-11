@@ -68,13 +68,6 @@ void servo_write(uint32_t index, uint32_t val) {
   }
 }
 
-/*temp*/
-void attach(uint32_t index) {}
-
-/*temp*/
-void detach(uint32_t index) {}
-
-/*temp*/
 void Timer2A_Handler() {
   //printf("%d :", curServo);
   if (curServo < SERVO_NUM) {
