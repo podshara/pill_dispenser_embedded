@@ -7,11 +7,11 @@
 #define DEFAULT_SERVO_PULSE_WIDTH       1500
 #define REFRESH_INTERVAL 		20000
 
-#define SERVO_NUM                       2
+#define SERVO_NUM                       4
 
-#define F_CPU                           16000000
+#define F_CPU                           8000000
 #define SERVO_MAX       180
-#define SERVO_MIN       50
+#define SERVO_MIN       35
 
 // command
 #define DISPENSE 1
@@ -30,5 +30,9 @@ void servo_Init();
  * write a pulse width of the given degress to the servo with index number
  */
 void servo_write(uint32_t index, uint32_t val);
+
+//void dispense();
+
+void dispenseSlot(int slotNum);
 
 #endif     //SERVO_H

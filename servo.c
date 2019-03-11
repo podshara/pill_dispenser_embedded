@@ -10,6 +10,34 @@ uint32_t servoPulse[SERVO_NUM];
 uint32_t enable[SERVO_NUM];
 uint32_t remainderPulse;
 
+void Timer0_Init(){
+  SYSCTL_RCGCTIMER_R |= SYSCTL_RCGCTIMER_R0;    //use timer 0
+  TIMER0_CTL_R &= ~TIMER_CTL_TAEN;              //disable timer
+  TIMER0_CFG_R = TIMER_CFG_32_BIT_TIMER;        //select 32 bit timer config
+  TIMER0_TAMR_R = TIMER_TAMR_TAMR_1_SHOT;       //countdown + one-shot mode
+  TIMER0_TAILR_R = F_CPU;                       //16MHz
+}
+
+void StartTimer0(){
+  TIMER0_CTL_R |= TIMER_CTL_TAEN;
+}
+
+void DisableTimer0(){
+  TIMER0_CTL_R &= ~TIMER_CTL_TAEN;
+}
+
+void ResetTimer0(){
+  TIMER0_ICR_R |= TIMER_ICR_TATOCINT;
+}
+
+void setTime0(int time){
+  TIMER0_TAILR_R = time;
+}
+
+int Timeout0(){
+  return TIMER0_RIS_R & TIMER_RIS_TATORIS;
+}
+
 void timer2A_Init() {
   SYSCTL_RCGCTIMER_R |= SYSCTL_RCGCTIMER_R2;    //use timer2A
   TIMER2_CTL_R &= ~TIMER_CTL_TAEN;              //disable timer
@@ -45,6 +73,8 @@ void calcuatePeriod() {
 }
 
 void servo_Init() {
+  Timer0_Init();
+  
   ticksPerMicrosecond = F_CPU / 1000000;
   portD_Init();
   
@@ -66,6 +96,19 @@ void servo_write(uint32_t index, uint32_t val) {
     //printf("%d\n", val);
     servoPulse[index] = val;
   }
+}
+
+void dispenseSlot(int slotNum){
+  if(slotNum == 4){
+    slotNum = 0;
+  }
+  servo_write(slotNum, SERVO_MIN);
+  setTime0(F_CPU);
+  StartTimer0();
+  
+  while(!Timeout0()){}
+  ResetTimer0();
+  servo_write(slotNum, SERVO_MAX);
 }
 
 void Timer2A_Handler() {

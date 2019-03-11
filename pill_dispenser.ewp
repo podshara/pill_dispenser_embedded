@@ -2117,9 +2117,6 @@
     </file>
     <file>
         <name>$PROJ_DIR$\PLL.c</name>
-        <excluded>
-            <configuration>Debug</configuration>
-        </excluded>
     </file>
     <file>
         <name>$PROJ_DIR$\schedule.c</name>

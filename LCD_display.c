@@ -3,6 +3,7 @@
 #include "inc/tm4c123gh6pm.h"
 #include "pillslot.h"
 #include "LCD_display.h"
+#include "servo.h"
 
 //int HR_COLOR[SCH_MAX_N][3] = {{250, 78, 78}, {134, 234, 78}};
 int SLOT_COLOR[SLOT_MAX_X * SLOT_MAX_Y][3] = 
@@ -307,10 +308,13 @@ void switchPage(int x, int y){
     case SLOT: 
       button = buttonPressSlot(x, y);
       if(button > -1 && button < 6){
-        page = PILL;
-        Draw_Pill(button);
-        slotNum = button;
-      } else if(button == 6){
+        //page = PILL;
+        //Draw_Pill(button);
+        //slotNum = button;
+        dispenseSlot(button);
+      }
+      
+      else if(button == 6){
         page = NEXT;
         Draw_ButtonFrame(SCH_BT_CHAR_X, SCH_BT_CHAR_Y, 12, convertColor(255,0,0));
         Draw_Next();
