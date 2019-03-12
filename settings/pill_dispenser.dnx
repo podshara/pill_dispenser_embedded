@@ -49,7 +49,7 @@
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
     <DebugChecksum>
-        <Checksum>870362865</Checksum>
+        <Checksum>1516268011</Checksum>
     </DebugChecksum>
     <LMIFTDIDriver>
         <LMIFTDIserialNo>0E222689</LMIFTDIserialNo>
@@ -81,7 +81,8 @@
         <Category>_ 0</Category>
     </LogFile>
     <Aliases>
-        <Count>0</Count>
+        <A0>_ "C:\Users\varit\Desktop\WI19\CSE474\pill_dispenser_v2\pill_dispenser_embedded\SSD2119.c" "C:\Users\podsh\Desktop\work\CSE_474\test\pill_dispenser_embedded\SSD2119.c"</A0>
+        <Count>1</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
     <CallStackLog>

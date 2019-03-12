@@ -4,8 +4,26 @@
 
 #define DIVIDER ((clock_rate * 1000000.0) / (16.0 * baud_rate))
 
-int clock_rate = 16;           // MHz
+int clock_rate = 8;           // MHz
 int baud_rate = 115200;
+
+void pll_Init() {
+  SYSCTL_RCC2_R |= SYSCTL_RCC2_USERCC2;                                         //use RCC2                    
+  SYSCTL_RCC2_R |= SYSCTL_RCC2_BYPASS2;                                         //bypass the pll
+  SYSCTL_RCC_R &= ~SYSCTL_RCC_USESYSDIV;                                        //bypass system clock divider
+  SYSCTL_RCC_R = (SYSCTL_RCC_R&~SYSCTL_RCC_XTAL_M)|SYSCTL_RCC_XTAL_16MHZ;       //select 16MHz crystal value
+  SYSCTL_RCC2_R = (SYSCTL_RCC2_R&~SYSCTL_RCC2_OSCSRC2_M)                        //select main oscillator source
+     |SYSCTL_RCC2_OSCSRC2_MO;
+  SYSCTL_RCC2_R &= ~SYSCTL_RCC2_PWRDN2;                                         //PLL operate normally(stop power down)
+  SYSCTL_RCC2_R |= SYSCTL_RCC2_DIV400;                                          //Use divide PLL as 400 MHz
+  SYSCTL_RCC2_R = (SYSCTL_RCC2_R                                                //select frequency for microcontroller
+      &~(SYSCTL_RCC2_SYSDIV2_M + SYSCTL_RCC2_SYSDIV2LSB))|
+      ((400 / clock_rate - 1)<<(SYSCTL_RCC2_SYSDIV2_S - 1));
+  SYSCTL_RCC_R |= SYSCTL_RCC_USESYSDIV;                                         //select system clock divider as the source
+  while(!(SYSCTL_RIS_R & SYSCTL_RIS_PLLLRIS)) {}                                //wait for pll to lock
+  SYSCTL_RCC2_R &= ~SYSCTL_RCC2_BYPASS2;                                        //enable pll
+}
+
 
 int get_ibrd() {
   return (int) DIVIDER;

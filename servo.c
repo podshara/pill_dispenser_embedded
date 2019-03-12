@@ -86,6 +86,10 @@ void servo_Init() {
   curServo = 0;
   
   timer2A_Init();
+  
+  for (int i = 0; i < SERVO_NUM; i++) {
+    servo_write(i, SERVO_MIN);
+  }
 }
 
 void servo_write(uint32_t index, uint32_t val) {
@@ -102,13 +106,18 @@ void dispenseSlot(int slotNum){
   if(slotNum == 4){
     slotNum = 0;
   }
+  servo_write(slotNum, SERVO_MAX);
+  setTime0(F_CPU);
+  StartTimer0();
+  
+  while(!Timeout0()){}
+  ResetTimer0();
   servo_write(slotNum, SERVO_MIN);
   setTime0(F_CPU);
   StartTimer0();
   
   while(!Timeout0()){}
   ResetTimer0();
-  servo_write(slotNum, SERVO_MAX);
 }
 
 void Timer2A_Handler() {

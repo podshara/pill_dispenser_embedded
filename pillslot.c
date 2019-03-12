@@ -1,18 +1,32 @@
+#include <stdlib.h>
 #include "pillslot.h"
 
 Pill pills[MAX_SLOT];
 int slotSize = 0;
 
-int setSlot(int slotNum, char* pillName, int amount){
+int setSlot(int slotNum, char pillName[NAME_LN], int amount){
   /*if(pills[slotNum].enabled){
     //Override?
     return 0;
   }*/
-  pills[slotNum].pillName = pillName;
+  for(int i = 0; i < NAME_LN; i++){
+    pills[slotNum].pillName[i] = pillName[i];
+  }
   pills[slotNum].amount = amount;
   pills[slotNum].enabled = 1;
   slotSize++;
   return 1;
+}
+
+void setName(int slotNum, char pillName[NAME_LN]){
+  for(int i = 0; i < NAME_LN; i++){
+    pills[slotNum].pillName[i] = pillName[i];
+  }
+  pills[slotNum].enabled = 1;
+}
+
+void setAmount(int slotNum, int amount){
+  pills[slotNum].amount = amount;
 }
 
 void removeSlot(int slotNum){
@@ -29,6 +43,16 @@ int compare( const void* a, const void* b){
    if ( int_a == int_b ) return 0;
    else if ( int_a < int_b ) return -1;
    else return 1;
+}
+
+int setTime(int slotNum, int timeset[MAX_TIMESET], int timeSize){
+  if(pills[slotNum].enabled){
+    pills[slotNum].timeSize = timeSize;
+    for(int i = 0; i < timeSize; i++){
+      pills[slotNum].time[i] = timeset[i];
+    }
+    qsort(pills[slotNum].time, timeSize, sizeof(int), compare);
+  }
 }
 
 int addTime(int slotNum, int t){

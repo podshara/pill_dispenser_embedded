@@ -110,13 +110,13 @@ void printPill(int slotNum, int x, int y, int full){
   }
   
   Pill pill = getPill(slotNum);
+  
   if(pill.enabled){
     LCD_Goto(charX, charY++);
     printf("Name: ");
     if(!full){
-      char* ptr = pill.pillName;
-      for(int i = 0; i < 8 && *ptr != 0; i++){
-        printf("%c", *ptr++);
+      for(int i = 0; i < 8 && pill.pillName[i] != 0; i++){
+        printf("%c", pill.pillName[i]);
       }
     } else {
       printf(pill.pillName);
