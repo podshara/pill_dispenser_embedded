@@ -1,8 +1,8 @@
 #include <stdint.h>
-#include <stdio.h>
 
 #include "inc/tm4c123gh6pm.h"
 #include "servo.h"
+#include "uart.h"
 
 volatile uint32_t ticksPerMicrosecond;
 uint32_t curServo;
@@ -97,15 +97,14 @@ void servo_write(uint32_t index, uint32_t val) {
     if(val < SERVO_MIN) {val = SERVO_MIN;}
     if(val > SERVO_MAX) {val = SERVO_MAX;}
     val = val * (MAX_SERVO_PULSE_WIDTH - MIN_SERVO_PULSE_WIDTH) / 180 + MIN_SERVO_PULSE_WIDTH;
-    //printf("%d\n", val);
     servoPulse[index] = val;
   }
 }
 
 void dispenseSlot(int slotNum){
-  if(slotNum == 4){
+  /*if(slotNum == 4){
     slotNum = 0;
-  }
+  }*/
   servo_write(slotNum, SERVO_MAX);
   setTime0(F_CPU);
   StartTimer0();
@@ -121,12 +120,9 @@ void dispenseSlot(int slotNum){
 }
 
 void Timer2A_Handler() {
-  //printf("%d :", curServo);
   if (curServo < SERVO_NUM) {
-    //printf("%d\n", ticksPerMicrosecond * servoPulse[curServo]);
     TIMER2_TAILR_R = ticksPerMicrosecond * servoPulse[curServo];
   } else {
-    //printf("%d\n",  ticksPerMicrosecond * remainderPulse);
     TIMER2_TAILR_R = ticksPerMicrosecond * remainderPulse;  
   }
   if (curServo > 0 && enable[curServo - 1]) {

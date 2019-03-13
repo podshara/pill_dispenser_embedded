@@ -5,10 +5,6 @@ Pill pills[MAX_SLOT];
 int slotSize = 0;
 
 int setSlot(int slotNum, char pillName[NAME_LN], int amount){
-  /*if(pills[slotNum].enabled){
-    //Override?
-    return 0;
-  }*/
   for(int i = 0; i < NAME_LN; i++){
     pills[slotNum].pillName[i] = pillName[i];
   }
@@ -45,7 +41,7 @@ int compare( const void* a, const void* b){
    else return 1;
 }
 
-int setTime(int slotNum, int timeset[MAX_TIMESET], int timeSize){
+void setTime(int slotNum, int timeset[MAX_TIMESET], int timeSize){
   if(pills[slotNum].enabled){
     pills[slotNum].timeSize = timeSize;
     for(int i = 0; i < timeSize; i++){

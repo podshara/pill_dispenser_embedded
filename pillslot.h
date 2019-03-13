@@ -19,7 +19,7 @@ int setSlot(int slotNum, char pillName[NAME_LN], int amount);
 
 void removeSlot(int slotNum);
 
-int setTime(int slotNum, int timeset[MAX_TIMESET], int timeSize);
+void setTime(int slotNum, int timeset[MAX_TIMESET], int timeSize);
 
 void setName(int slotNum, char pillName[NAME_LN]);
 
@@ -34,7 +34,7 @@ int dispensePill(int slotNum);
 //Returns pill details.
 Pill getPill(int slotNum);
 
-//return number of alarms
+//return next alarms
 int getNextPill(int nextPill[MAX_SLOT], int* time, int currTime);
 
 #endif

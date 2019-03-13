@@ -65,15 +65,17 @@ void Draw_Button(int charX, int charY, char* str, int length, int color);
 
 void printTime(int t);
 
+void updateNameDisplay(int slotNum);
+
+void updateCountDisplay(int slotNum);
+
+void printPill(int slotNum);
 //-----------------Draw Page--------------------
 //Draw next alarm
 void Draw_Next();//in progress
 
 //Draw concise pill details in slots
 void Draw_Slots();
-
-//Draw pill details full screen
-void Draw_Pill(int slotNum);
 
 void switchPage(int x, int y);
 

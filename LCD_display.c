@@ -3,9 +3,14 @@
 #include "inc/tm4c123gh6pm.h"
 #include "pillslot.h"
 #include "LCD_display.h"
+#include "uart_pd.h"
 #include "servo.h"
 
 //int HR_COLOR[SCH_MAX_N][3] = {{250, 78, 78}, {134, 234, 78}};
+PAGE page = SLOT;
+int slotNum = -1;
+int prevX = 0, prevY = 0;
+int touch = 0;
 int SLOT_COLOR[SLOT_MAX_X * SLOT_MAX_Y][3] = 
       {{0,0,255}, {0,255,0}, {0,255,255}, {255,0,0}, {255,0,255}, {255,255,0}};
 
@@ -100,51 +105,6 @@ void Draw_Next(){
 }
 
 //--------------Pill Slot--------------------
-void printPill(int slotNum, int x, int y, int full){
-  int charX, charY;
-  px2Char(&charX, &charY, x, y, 1, 1);
-  
-  if(!full){
-    LCD_Goto(charX, charY++);
-    printf("%d", slotNum + 1);
-  }
-  
-  Pill pill = getPill(slotNum);
-  
-  if(pill.enabled){
-    LCD_Goto(charX, charY++);
-    printf("Name: ");
-    if(!full){
-      for(int i = 0; i < 8 && pill.pillName[i] != 0; i++){
-        printf("%c", pill.pillName[i]);
-      }
-    } else {
-      printf(pill.pillName);
-    }
-    LCD_Goto(charX, charY++);
-    printf("Amount: %d", pill.amount);
-    
-    if(full){
-      LCD_Goto(charX, charY++);
-      printf("Alarm Type: ");     
-      printf("Time Set");
-      LCD_Goto(charX, charY++);
-      printf("Time List: ");
-      
-    }
-    for(int i = 0; i < pill.timeSize; i++){
-      if(!full && i >= 5){
-        break;
-      }
-      LCD_Goto(charX + 1, charY++);
-      printTime(pill.time[i]);
-    }
-    if(!full && pill.timeSize > 5){
-      printf(" ...");
-    }
-  }
-}
-
 void Draw_SlotFrame(int slot, int slotX, int slotY, int slot_wd, int slot_ht){
   LCD_DrawFilledRect(slotX, slotY + slot_ht - SLOT_PAD, slot_wd, SLOT_PAD, 
           convertColor(SLOT_COLOR[slot][0], SLOT_COLOR[slot][1], SLOT_COLOR[slot][2]));
@@ -156,29 +116,89 @@ void Draw_SlotFrame(int slot, int slotX, int slotY, int slot_wd, int slot_ht){
           convertColor(SLOT_COLOR[slot][0], SLOT_COLOR[slot][1], SLOT_COLOR[slot][2]));
 }
 
+void printPill(int slotNum){
+  int i = slotNum % SLOT_MAX_X;
+  int j = slotNum / SLOT_MAX_X;
+  // draw frame
+  int slotX = (int)(SLOT_OFFSET_X + i * (SLOT_WD + 1));
+  int slotY = (int)(SLOT_OFFSET_Y + j * (SLOT_HT + 1));
+  int x = slotX + SLOT_PAD;
+  int y = slotY + SLOT_PAD;
+  Draw_SlotFrame(slotNum, slotX, slotY, (int)SLOT_WD, (int)SLOT_HT);
+  LCD_DrawFilledRect(x, y, (int)SLOT_WD - SLOT_PAD * 2, (int)SLOT_HT - SLOT_PAD * 2,
+                     convertColor(0,0,0));
+  // draw information
+  int charX, charY;
+  px2Char(&charX, &charY, x, y, 1, 1);
+  
+  LCD_Goto(charX, charY++);
+  printf("%d", slotNum + 1);
+  
+  Pill pill = getPill(slotNum);
+  
+  if(pill.enabled){
+    LCD_Goto(charX, charY++);
+    printf("Name: ");
+    for(int i = 0; i < 8 && pill.pillName[i] != 0; i++){
+      printf("%c", pill.pillName[i]);
+    }
+    LCD_Goto(charX, charY++);
+    printf("Amount: %d", pill.amount);
+  }
+}
+
+void updateCountDisplay(int slotNum) {
+  switch (page) {
+  case SLOT:
+    Pill pill = getPill(slotNum);    
+    if(pill.enabled){
+      int i = slotNum % SLOT_MAX_X;
+      int j = slotNum / SLOT_MAX_X;
+      int x = (int)(SLOT_OFFSET_X + i * (SLOT_WD + 1)) + SLOT_PAD;
+      int y = (int)(SLOT_OFFSET_Y + j * (SLOT_HT + 1)) + SLOT_PAD;
+      int charX, charY;
+      px2Char(&charX, &charY, x, y, 1, 1);
+      LCD_Goto(charX, charY+2);
+      printf("Amount: %d  ", pill.amount);
+    }
+    break;
+  default: break;
+  }
+}
+
+void updateNameDisplay(int slotNum) {
+  switch (page) {
+  case SLOT:
+    Pill pill = getPill(slotNum);    
+    if(pill.enabled){
+      int i = slotNum % SLOT_MAX_X;
+      int j = slotNum / SLOT_MAX_X;
+      int x = (int)(SLOT_OFFSET_X + i * (SLOT_WD + 1)) + SLOT_PAD;
+      int y = (int)(SLOT_OFFSET_Y + j * (SLOT_HT + 1)) + SLOT_PAD;
+      int charX, charY;
+      px2Char(&charX, &charY, x, y, 1, 1);
+      LCD_Goto(charX, charY+1);
+      printf("Name: ");
+      int it = 0;
+      while (it < 8 && pill.pillName[it] != 0) {
+        printf("%c", pill.pillName[it]);
+        it++;
+      }
+      while(it < 8) {
+        printf(" ");
+        it++;
+      }
+    }
+    break;
+  default: break;
+  }
+}
+
 void Draw_Slots(){
   LCD_ColorFill(SLOT_BG);
   Draw_Header(" Pill Slots ", 12);
-  
-  float slot_wd = SLOT_WD;
-  float slot_ht = SLOT_HT;
-  //int maxChar = (int)(slot_wd - SLOT_PAD * 2) / CHAR_WD;
-  
-  for(int y = 0; y < SLOT_MAX_Y; y++){
-    for(int x = 0; x < SLOT_MAX_X; x++){
-      int slotX = (int)(SLOT_OFFSET_X + x * (slot_wd + 1));
-      int slotY = (int)(SLOT_OFFSET_Y + y * (slot_ht + 1));
-      int slot = x + y * SLOT_MAX_X;
-      
-      /*LCD_DrawFilledRect(slotX, slotY, (int)slot_wd, (int)slot_ht, 
-              convertColor(SLOT_COLOR[slot][0], SLOT_COLOR[slot][1], SLOT_COLOR[slot][2]));*/
-      
-      Draw_SlotFrame(slot, slotX, slotY, (int)slot_wd, (int)slot_ht);
-      LCD_DrawFilledRect(slotX + SLOT_PAD, slotY + SLOT_PAD, 
-                         (int)slot_wd - SLOT_PAD * 2, (int)slot_ht - SLOT_PAD * 2,
-                         convertColor(0,0,0));
-      printPill(slot, slotX + SLOT_PAD, slotY + SLOT_PAD, 0);
-    }
+  for (int i = 0; i < SLOT_MAX_X * SLOT_MAX_Y; i++) {
+    printPill(i);
   }
   
   //Draw Schedule button
@@ -186,12 +206,12 @@ void Draw_Slots(){
 }
 
 //--------------------Pill---------------------
-void Draw_PillCursor(int cursor, int color){
+/*void Draw_PillCursor(int cursor, int color){
   LCD_DrawRect(SLOT_OFFSET_X, SLOT_OFFSET_Y + SLOT_PAD + cursor * CHAR_HT, 
                LCD_WIDTH - 2 * SLOT_OFFSET_X - BT_SIZE - 1, CHAR_HT, color);
-}
+}*/
 
-void Draw_Pill(int slotNum){
+/*void Draw_Pill(int slotNum){
   LCD_ColorFill(SLOT_BG);
   
   Draw_Header(" Slot   ", 8);
@@ -206,7 +226,7 @@ void Draw_Pill(int slotNum){
   printPill(slotNum, SLOT_OFFSET_X, SLOT_OFFSET_Y, 1);
   
   Draw_Button(BACK_BT_CHAR_X, BACK_BT_CHAR_Y, " Back ", 6, 0x0000);
-}
+}*/
 
 //--------------------Touch-------------------
 //0 - 5: slot number, 6: schedule button, -1: ow
@@ -244,9 +264,6 @@ int buttonPressPill(int x, int y){
   }
   return -1;
 }
-
-int prevX = 0, prevY = 0;
-int touch = 0;
 
 void readCoor(int* touchX, int* touchY, int* touched){
   Touch_ReadX();
@@ -287,9 +304,6 @@ void readCoor(int* touchX, int* touchY, int* touched){
   }
 }
 
-PAGE page = SLOT;
-int slotNum = -1;
-
 void set_page(PAGE input) {
   page = input;
 }
@@ -312,6 +326,7 @@ void switchPage(int x, int y){
         //Draw_Pill(button);
         //slotNum = button;
         dispenseSlot(button);
+        uart1_outchar(button+1);
       }
       
       else if(button == 6){
@@ -333,37 +348,3 @@ void switchPage(int x, int y){
       break;
   }
 }
-
-//---------------------main---------------------------
-/*
-int main() {
-  LCD_Init();
-  Touch_Init();
-  //Timer0_Init();
-  
-  setSlot(0, "pedegreeeeeeeeiei", 10);
-  setSlot(1, "me-o", 10);
-  setSlot(2, "oreo", 5);
-  setSlot(3, "kuy", 11);
-  setSlot(4, "doop", 24);
-  
-  addTime(0, 6 * 60 + 30);
-  addTime(0, 12 * 60);
-  addTime(0, 18 * 60 + 59);
-  addTime(0, 5);
-  addTime(0, 259);
-  addTime(0, 2333);
-  //setPeriod(1, 4 * 60 + 10, 6 * 60, 18 * 60);
-  //setPeriod(2, 5, 0, 60);
-  addTime(4, 5);
-  
-  Draw_Slots();
-  
-  int x, y, touch;
-  while(1) {
-    readCoor(&x, &y, &touch);
-    if(touch){
-      switchPage(x, y);
-    }
-  }
-}*/
